@@ -139,6 +139,24 @@
       ;; TODO use transient state instead of old micro-state, IIRC we continue
       ;; to use micro-state because of the re-entry keyword :on-enter which is
       ;; not available in transient state
+
+      (spacemacs|add-toggle magit-fullscreen-status
+        :status git-magit-status-fullscreen
+        :on
+        (progn
+          (setq
+           git-magit-status-fullscreen t
+           magit-display-buffer-function git-magit-fullscreen-display-buffer-function)
+          (message "Enabled fullscreen magit status buffer."))
+        :off
+        (progn
+          (setq
+           git-magit-status-fullscreen nil
+           magit-display-buffer-function git-magit-default-display-buffer-function)
+          (message "Disabled fullscreen magit status buffer."))
+        :documentation "Toggle fullscreen magit status buffer"
+        :evil-leader "tM")
+
       (spacemacs|define-micro-state git-blame
         :title "Git Blame Transient State"
         :doc "
@@ -369,8 +387,9 @@ Press [_b_] again to blame further in the history, [_q_] to go up or quit."
       (define-key magit-status-mode-map (kbd "C-S-w")
         'spacemacs/magit-toggle-whitespace)
       ;; full screen magit-status
-      (when git-magit-status-fullscreen
-        (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1)))))
+      (if git-magit-status-fullscreen
+          (spacemacs//magit-enable-fullscreen-status-buffer)
+        (spacemacs//magit-enable-default-status-buffer)))))
 
 (defun git/init-magit-gitflow ()
   (use-package magit-gitflow

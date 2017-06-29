@@ -16,3 +16,11 @@
 
 (defvar git-magit-status-fullscreen nil
   "If non nil magit-status buffer is displayed in fullscreen.")
+
+(defvar git-magit-default-display-buffer-function
+  'magit-display-buffer-traditional
+  "Default function for displaying maggit-status buffer")
+
+(defvar git-magit-fullscreen-display-buffer-function
+  'magit-display-buffer-fullframe-status-v1
+  "Function for displaying a fullscreen maggit-status buffer")

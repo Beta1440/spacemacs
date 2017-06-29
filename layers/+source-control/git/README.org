@@ -120,6 +120,7 @@ Git commands (start with ~g~):
 | ~SPC g M~   | display the last commit message of the current line |
 | ~SPC g t~   | launch the git time machine                         |
 | ~SPC g U~   | unstage current file                                |
+| ~SPC t M~   | toggle fullscreen =magit= status buffer             |
 
 - Highlight by age of commit or last update time is provided by
  [[https://github.com/syohex/emacs-smeargle][smeargle]].
